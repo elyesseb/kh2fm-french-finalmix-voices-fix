@@ -1,5 +1,7 @@
 # KH2FM French Final Mix Voices Fix (PS2)
 
+[English version / Version anglaise](README_EN.md)
+
 Correctif expérimental pour **Kingdom Hearts II Final Mix sur PS2 (SLPM-66675)**, destiné aux utilisateurs du patch français qui rencontrent un écran noir, un crash PCSX2 ou des scènes exclusives à Final Mix sans voix.
 
 > **Statut : expérimental**
@@ -200,20 +202,3 @@ Il ne contient pas d'ISO de Kingdom Hearts II Final Mix, de BIOS PS2 ou d'image 
 
 Projet non officiel, sans affiliation avec Square Enix, Disney, Sony, GovanifY ou CrazyCatz00.
 
----
-
-## English summary
-
-This is an **experimental compatibility fix** for the French KH2FM PS2 FANDUB on `SLPM-66675`.
-
-It is intended for users experiencing:
-
-- black screen after applying the old French FANDUB;
-- PCSX2 crashes / `ReadFIFO_VIF1`;
-- Final Mix-exclusive cutscenes with French subtitles but no voices.
-
-Use `FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch` **instead of** the old `FANDUB[1_0].kh2patch`.
-
-Only one Final Mix-exclusive cutscene has been manually confirmed so far, so this release should still be considered experimental.
-
-Search terms: KH2FM French patch, KH2 Final Mix French FANDUB, PCSX2 black screen, ReadFIFO_VIF1, VIF FIFO READ, SLPM-66675, Final Mix cutscene no voice.
