@@ -2,6 +2,26 @@
 
 Experimental community patch for **Kingdom Hearts II Final Mix (PS2, SLPM-66675)**.
 
+## Easiest option for most users
+
+If you just want the fix, use the prebuilt experimental patch already included in this repository:
+
+`FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
+
+If you prefer to rebuild it yourself from the two original community patches, Windows users can use the included one-click builder:
+
+1. Download this repository.
+2. Put these two original files next to the builder:
+   - `FANDUB[1_0].kh2patch`
+   - `1. Translation.kh2patch`
+3. Double-click `Build_French_Fandub.bat`.
+4. The script verifies the known French FANDUB version, rebuilds the 165 matched entries, and creates:
+   `FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
+5. A successful build should have MD5:
+   `73F43F66828453456946D9E9CFCE3F72`
+
+The builder uses only Windows PowerShell and does not require Python.
+
 ## What this is
 
 This project is a compatibility-oriented rebuild of the old French **FANDUB** patch for the extra **Final Mix-only cutscenes**.
@@ -113,7 +133,7 @@ Credits preserved from the original FANDUB patch:
 - English KH2FM PS2 translation patch
 - Final Mix English voices / lip-sync work used as the structural compatibility reference for this rebuild
 
-Please support and credit the original patch authors. This repository does not claim ownership of their original work.
+Please support and credit the original patch authors. This repository does not claim ownership of their original work. See `THIRD_PARTY_NOTICES.md` for licensing/attribution notes.
 
 ### Original project links
 
