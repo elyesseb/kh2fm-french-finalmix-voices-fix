@@ -1,148 +1,181 @@
 # KH2FM French Final Mix Voices Fix (PS2)
 
-> **FR — Correctif expérimental pour le FANDUB français de Kingdom Hearts II Final Mix (PS2 / SLPM-66675).**
+Correctif expérimental pour **Kingdom Hearts II Final Mix sur PS2 (SLPM-66675)**, destiné aux utilisateurs du patch français qui rencontrent un écran noir, un crash PCSX2 ou des scènes exclusives à Final Mix sans voix.
+
+> **Statut : expérimental**
 >
-> Si le vieux `FANDUB[1_0].kh2patch` te donne un **écran noir**, un **crash PCSX2**, une erreur **VIF / ReadFIFO_VIF1**, ou si les **scènes exclusives à Final Mix restent muettes**, ce dépôt contient le correctif qui a résolu ce problème pendant nos tests.
+> Le correctif a été testé avec succès sur **une seule scène exclusive à Final Mix**.
+> Nouvelle partie : OK.  
+> Chargement Memory Card : OK.  
+> Scène testée : voix françaises OK.
 >
-> **Testé pour l'instant sur une seule scène Final Mix.** Nouvelle partie, chargement Memory Card et cette scène ont fonctionné avec les voix françaises.
+> Le reste du jeu n'a pas encore été vérifié scène par scène.
 
-Experimental community patch for **Kingdom Hearts II Final Mix (PS2, SLPM-66675)**.
+---
 
-**Search terms / mots-clés:** KH2FM French patch, KH2 Final Mix French FANDUB, écran noir, black screen, PCSX2 crash, ReadFIFO_VIF1, VIF FIFO READ, SLPM-66675, Final Mix cutscene no voice, scènes Final Mix sans voix.
+## Tu as ce problème ?
 
-## Solution rapide / Quick fix
+Ce dépôt peut t'aider si tu utilises l'ancien FANDUB français et que tu rencontres un ou plusieurs de ces symptômes :
 
-Pour la plupart des utilisateurs :
+- écran noir au lancement d'une nouvelle partie ;
+- écran noir au chargement d'une sauvegarde ;
+- crash PCSX2 ;
+- erreur du type `ReadFIFO_VIF1` / `VIF FIFO READ` ;
+- scènes exclusives à Final Mix avec sous-titres français mais **sans voix** ;
+- l'ancien `FANDUB[1_0].kh2patch` fait planter une ISO qui fonctionne sans lui.
+
+Le problème a été reproduit sur **Kingdom Hearts II Final Mix — SLPM-66675**.
+
+---
+
+## Solution rapide
+
+Si tu veux juste jouer sans lire toute l'explication :
 
 1. Pars d'une ISO propre de **Kingdom Hearts II Final Mix — SLPM-66675**.
-2. Applique les patchs FR classiques que tu utilises déjà.
+2. Applique les patchs français classiques que tu utilises habituellement :
+   - `TEXTFR[1_3].kh2patch`
+   - `TEXTURES[1_2].kh2patch`
+   - `VOICES1[2_0].kh2patch`
+   - `VOICES2[1_0].kh2patch`
 3. **N'applique pas** l'ancien `FANDUB[1_0].kh2patch`.
 4. Applique à la place :
-   `FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
-5. Lance le jeu normalement et teste avec une vraie Memory Card PCSX2, pas seulement un save state.
+   - `FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
+5. Lance le jeu normalement dans PCSX2.
+6. Teste de préférence avec une vraie Memory Card PCSX2, pas uniquement avec un ancien save state.
 
-ISO propre utilisée pendant les tests — MD5 :
-`1BD351E1DF9FC5D783D8318010D17F03`
+### ISO propre utilisée pour les tests
 
-Patch expérimental — MD5 :
+- Jeu : Kingdom Hearts II Final Mix
+- Région : Japon
+- Serial : `SLPM-66675`
+- MD5 : `1BD351E1DF9FC5D783D8318010D17F03`
+
+### Correctif actuel
+
+- Fichier : `FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
+- MD5 : `73F43F66828453456946D9E9CFCE3F72`
+
+---
+
+## Pourquoi ce correctif existe
+
+L'ancien FANDUB français ajoute un grand nombre de nouveaux fichiers audio à l'ISO.
+
+Pendant le diagnostic, le comportement suivant a été reproduit :
+
+- 72 nouveaux fichiers audio : le jeu démarre ;
+- 73 nouveaux fichiers audio : crash / écran noir ;
+- le 73e fichier audio fonctionne pourtant très bien lorsqu'il est ajouté tout seul.
+
+Le problème ne venait donc pas simplement d'un WAV corrompu.
+
+En parallèle, le patch anglais de **CrazyCatz00** contenant les voix des scènes Final Mix fonctionnait correctement sur la même base.
+
+Le correctif de ce dépôt utilise donc :
+
+- la **structure d'entrées fonctionnelle** du patch CrazyCatz00 ;
+- les **voix françaises** du FANDUB original.
+
+165 entrées audio françaises ont pu être associées directement.  
+Une entrée du FANDUB français n'avait pas d'équivalent direct dans le patch CrazyCatz00 et a volontairement été laissée de côté pour cette version expérimentale.
+
+---
+
+## Compatibilité
+
+Testé avec :
+
+- Kingdom Hearts II Final Mix japonais — `SLPM-66675`
+- ISO propre MD5 `1BD351E1DF9FC5D783D8318010D17F03`
+- KH2FM Toolkit `2.9.5.0`
+- PCSX2
+
+Le correctif est prévu pour compléter les patchs français classiques listés plus haut.
+
+### À ne pas faire
+
+N'applique pas à la fois :
+
+- `FANDUB[1_0].kh2patch`
+- et `FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
+
+Utilise **le correctif hybride à la place de l'ancien FANDUB**.
+
+---
+
+## Si tu préfères reconstruire le patch toi-même
+
+Le dépôt contient aussi un builder Windows.
+
+Il permet de reconstruire le correctif à partir des deux patchs originaux sans avoir besoin de Python.
+
+### Fichiers nécessaires
+
+Place dans le même dossier :
+
+- `FANDUB[1_0].kh2patch`
+- `1. Translation.kh2patch`
+- `Build_French_Fandub.bat`
+- `build_french_fandub.ps1`
+
+Puis double-clique sur :
+
+`Build_French_Fandub.bat`
+
+Le script doit produire :
+
+`FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
+
+MD5 attendu :
+
 `73F43F66828453456946D9E9CFCE3F72`
 
-## Easiest option for most users
+Le builder vérifie automatiquement que les fichiers utilisés correspondent à la version attendue.
 
-If you just want the fix, use the prebuilt experimental patch already included in this repository:
+---
 
-`FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
+## Comment signaler un problème
 
-If you prefer to rebuild it yourself from the two original community patches, Windows users can use the included one-click builder:
+Si une scène plante ou reste muette, ouvre une issue GitHub et indique si possible :
 
-1. Download this repository.
-2. Put these two original files next to the builder:
-   - `FANDUB[1_0].kh2patch`
-   - `1. Translation.kh2patch`
-3. Double-click `Build_French_Fandub.bat`.
-4. The script verifies the known French FANDUB version, rebuilds the 165 matched entries, and creates:
-   `FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
-5. A successful build should have MD5:
-   `73F43F66828453456946D9E9CFCE3F72`
+- le monde / la scène concernée ;
+- si Nouvelle partie fonctionne ;
+- si le chargement Memory Card fonctionne ;
+- ta version de PCSX2 ;
+- les autres fichiers `.kh2patch` appliqués ;
+- le MD5 de ton ISO de départ ;
+- si tu as utilisé un save state ou une Memory Card normale.
 
-The builder uses only Windows PowerShell and does not require Python.
+Le fichier `TESTING.md` contient une checklist plus détaillée.
 
-## What this is
+---
 
-This project is a compatibility-oriented rebuild of the old French **FANDUB** patch for the extra **Final Mix-only cutscenes**.
+## Crédits
 
-The original French FANDUB worked by adding many new voice files. During testing, that old patch consistently caused crashes / black screens on a clean SLPM-66675 image with the old KH2FM Toolkit.
+Ce correctif repose sur le travail de la communauté KH2FM.
 
-A working English community patch by **CrazyCatz00** did not show the same problem. This experimental hybrid patch therefore keeps the **working destination/entry structure from CrazyCatz00's translation patch** while substituting the corresponding **French FANDUB audio payloads**.
+### GovanifY
 
-The resulting file is:
+- patch français KH2FM original ;
+- KH2FM Toolkit ;
+- FANDUB français original.
 
-`FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`
+Projet français :  
+https://govanify.com/KH/KH2FM_FR.html
 
-It currently contains **165 matched French Final Mix voice entries**. One French FANDUB entry had no direct equivalent in the CrazyCatz00 patch and is intentionally omitted for now.
+Toolkit :  
+https://github.com/GovanifY/KH2FM_Toolkit
 
-## Test status — important
+### CrazyCatz00
 
-**Experimental / v0.1 quality.**
+Le patch anglais KH2FM de CrazyCatz00 a servi de référence structurelle pour les entrées de voix Final Mix.
 
-So far, the patch has only been manually confirmed on **one Final Mix-exclusive cutscene**.
+https://crazycatz00.x10host.com/kh/kh2-patches.ps2/
 
-Confirmed by the tester:
-- New Game starts correctly.
-- Memory Card loading works.
-- The tested Final Mix cutscene plays with **French voices** instead of being silent.
+### Doubleurs du FANDUB français
 
-The rest of the Final Mix-exclusive scenes have **not yet been fully tested**. Please report any missing voice, crash, desync, or wrong line.
-
-This was originally investigated simply to help a friend who was having problems with the old FANDUB patch.
-
-## Required base
-
-Use a clean Japanese PS2 image of:
-
-- **Kingdom Hearts II Final Mix**
-- Serial: **SLPM-66675**
-- Known clean ISO MD5 used during testing:  
-  `1BD351E1DF9FC5D783D8318010D17F03`
-
-No game ISO is provided here.
-
-## Intended French setup
-
-This hybrid patch is intended to complement the classic French KH2FM patches:
-
-- `TEXTFR[1_3].kh2patch`
-- `TEXTURES[1_2].kh2patch`
-- `VOICES1[2_0].kh2patch`
-- `VOICES2[1_0].kh2patch`
-
-The old `FANDUB[1_0].kh2patch` should **not** be applied alongside this hybrid patch.
-
-### Suggested workflow
-
-1. Start from a clean SLPM-66675 ISO.
-2. Apply the four classic French patches above.
-3. Apply `FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch`.
-4. Test with a normal boot and Memory Card save.
-5. Avoid relying on an old PCSX2 save state when validating a newly patched ISO.
-
-The project was tested with the classic **KH2FM Toolkit 2.9.5.0**.
-
-## Why this exists
-
-During debugging, a reproducible pattern appeared with the old French FANDUB:
-
-- 72 newly-added audio entries: game booted correctly.
-- 73 newly-added audio entries: crash / PCSX2 VIF assertion.
-- The individual 73rd audio file worked when added by itself.
-
-This indicated that the issue was not simply one broken WAV. The working CrazyCatz00 patch demonstrated that the Final Mix voice replacements could be structured differently without the same failure.
-
-The hybrid patch was built by matching destination hashes between:
-- the old French FANDUB patch, and
-- CrazyCatz00's working English translation patch,
-
-then retaining the working CrazyCatz00 entry metadata/order while inserting the French FANDUB audio data.
-
-## Checksums
-
-For the current experimental patch:
-
-- MD5: `73F43F66828453456946D9E9CFCE3F72`
-- SHA-256: `B9C1066EFE598C2881E6C76B1E2AAB7F9644FB6BA1F27AA721F49F783BA2AFD6`
-
-## Credits
-
-This fix would not exist without the work of the original community authors.
-
-### Original French FANDUB / tooling
-**GovanifY**
-- Original KH2FM French patch project
-- KH2FM Toolkit
-- Original French FANDUB patch
-
-### Original French FANDUB voice cast
-Credits preserved from the original FANDUB patch:
+Crédits conservés depuis le projet original :
 
 - 4sancou — Ansem, Demyx
 - Gael42 — Axel, Riku
@@ -153,32 +186,34 @@ Credits preserved from the original FANDUB patch:
 - UnbirthXXI — Xigbar
 - Watamano — Roxas
 
-### Working Final Mix voice-entry structure
-**CrazyCatz00**
-- English KH2FM PS2 translation patch
-- Final Mix English voices / lip-sync work used as the structural compatibility reference for this rebuild
+Voir également `THIRD_PARTY_NOTICES.md`.
 
-Please support and credit the original patch authors. This repository does not claim ownership of their original work. See `THIRD_PARTY_NOTICES.md` for licensing/attribution notes.
+---
 
-### Original project links
+## À propos de ce dépôt
 
-- GovanifY KH2FM French project: https://govanify.com/KH/KH2FM_FR.html
-- KH2FM Toolkit source: https://github.com/GovanifY/KH2FM_Toolkit
-- CrazyCatz00 KH2 PS2 patches: https://crazycatz00.x10host.com/kh/kh2-patches.ps2/
+Ce correctif a été créé à l'origine simplement pour aider un ami qui rencontrait le même problème avec le FANDUB français.
 
-## Reporting issues
+Le dépôt est publié pour éviter que d'autres personnes perdent des heures à diagnostiquer le même crash.
 
-When reporting a problem, include:
+Il ne contient pas d'ISO de Kingdom Hearts II Final Mix, de BIOS PS2 ou d'image complète du jeu.
 
-- Which Final Mix cutscene
-- Whether New Game works
-- Whether Memory Card loading works
-- PCSX2 version
-- Which other `.kh2patch` files were applied
-- Whether the ISO started from the clean MD5 above
+Projet non officiel, sans affiliation avec Square Enix, Disney, Sony, GovanifY ou CrazyCatz00.
 
-## Legal / distribution note
+---
 
-This repository does **not** provide a Kingdom Hearts II Final Mix ISO, BIOS, or other full game image.
+## English summary
 
-You are expected to use your own legally obtained game media and BIOS. This is an unofficial fan/community project and is not affiliated with Square Enix, Disney, Sony, or the original patch authors.
+This is an **experimental compatibility fix** for the French KH2FM PS2 FANDUB on `SLPM-66675`.
+
+It is intended for users experiencing:
+
+- black screen after applying the old French FANDUB;
+- PCSX2 crashes / `ReadFIFO_VIF1`;
+- Final Mix-exclusive cutscenes with French subtitles but no voices.
+
+Use `FINAL_MIX_FRENCH_VOICES_HYBRID.kh2patch` **instead of** the old `FANDUB[1_0].kh2patch`.
+
+Only one Final Mix-exclusive cutscene has been manually confirmed so far, so this release should still be considered experimental.
+
+Search terms: KH2FM French patch, KH2 Final Mix French FANDUB, PCSX2 black screen, ReadFIFO_VIF1, VIF FIFO READ, SLPM-66675, Final Mix cutscene no voice.
