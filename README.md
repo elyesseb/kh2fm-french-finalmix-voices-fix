@@ -115,6 +115,12 @@ Credits preserved from the original FANDUB patch:
 
 Please support and credit the original patch authors. This repository does not claim ownership of their original work.
 
+### Original project links
+
+- GovanifY KH2FM French project: https://govanify.com/KH/KH2FM_FR.html
+- KH2FM Toolkit source: https://github.com/GovanifY/KH2FM_Toolkit
+- CrazyCatz00 KH2 PS2 patches: https://crazycatz00.x10host.com/kh/kh2-patches.ps2/
+
 ## Reporting issues
 
 When reporting a problem, include:
